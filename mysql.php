@@ -212,8 +212,6 @@
            }
           $query .=" WHERE Id=\"".$arr["Id"]."\"";
           $result = mysqli_query($dbhandle,$query);
-          print_r($query);
-    
           return array("status"=>$result);
   }
        
