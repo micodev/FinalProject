@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     ini_set("display_errors",true);
@@ -16,7 +15,13 @@
      {$qnum=$_SESSION["qnum"];$_SESSION["qnum"]=$_SESSION["qnum"]+1;}
      $sub = selectSubject($qid);
      $qstr="submit";
-     $question = json_decode($sub[0]["questionsId"],JSON_OBJECT_AS_ARRAY)[$qnum];
+     if($sub[0]["questionCount"]==$qnum)
+     {
+         
+         $qstr = "Finish";
+     }
+     else{
+     $question = json_decode($sub[0]["questionsId"],JSON_OBJECT_AS_ARRAY)[$qnum] ;
      if($qnum>0){
         $degree = json_decode($sub[0]["degree"],JSON_OBJECT_AS_ARRAY);
         $question_1=$_POST["question"];
@@ -35,12 +40,7 @@
      shuffle($answers);
      $type = json_decode($sub[0]["type"],JSON_OBJECT_AS_ARRAY)[$qnum];
      $qnum=$qnum+1;
-     if($sub[0]["questionCount"]<=$qnum)
-     {
-         // last question
-         $qstr = "Finish";
-
-     }
+    }
     }
     else
     {
@@ -51,22 +51,23 @@
    ?>
 <!DOCTYPE html>
 <html>
-   <?php include("Head.php"); ?>
-   <body>
-      <?php
+<?php include("Head.php"); ?>
+
+<body>
+    <?php
          include("Header.php");
          ?>
-      <div class="jumbotron vertical-center">
-         <div class="container text-center">
-         <?php if($qstr=="Finish") include("finishQuestion.php");else include("answeringQuestion.php");?>
-         </div>
-      </div>
-      <footer style="width:100%;" class="pt-4 my-md-5 pt-md-5 border-top">
-         <div style="width:100%;" class="row">
-         <div class="col-12 col-md">
-            <small class="d-block mb-1 text-muted">&copy; 2017-2018</small>
-         </div>
-      </footer>
-   </body>
-</html>
+    <div class="jumbotron vertical-center">
+        <div class="container text-center">
+            <?php if($qstr=="Finish") include("finishQuestion.php");else include("answeringQuestion.php");?>
+        </div>
+    </div>
+    <footer style="width:100%;" class="pt-4 my-md-5 pt-md-5 border-top">
+        <div style="width:100%;" class="row">
+            <div class="col-12 col-md">
+                <small class="d-block mb-1 text-muted">&copy; 2017-2018</small>
+            </div>
+    </footer>
+</body>
 
+</html>
