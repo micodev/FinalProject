@@ -29,14 +29,7 @@ if($_SESSION["isTeacher"])
       ?>
       <main class="container" role="main">
          <div class="jumbotron text-center">
-         <div class="col-md-12 text-center">
-            <p>Create Subject</p>
-            <ul class="nav nav-pills center-pills">
-               <li>
-                  <a class="nav-link" id="pills-Subject-tab" data-toggle="pill" href="#pills-Subject" role="tab" aria-controls="pills-Subject" aria-selected="false">New Subject</a> 
-               </li>
-            </ul>
-         </div>
+        
          <div class="row">
                <?php
                $student = selectStudent($stId);
@@ -50,7 +43,7 @@ if($_SESSION["isTeacher"])
                             <div class="card-body">
                                 <h5 class="card-title">'.$val["name"].'</h5>
                                 <p class="card-text">Degree&nbsp:&nbsp'.$degree.'</p>
-                                <a href="question?id='.$val["Id"].'" class="btn btn-primary">Go somewhere</a>
+                                <a href="questions.php?qid='.$val["Id"].'" class="btn btn-primary">Go somewhere</a>
                             </div>
                             </div>
                           </div>';
