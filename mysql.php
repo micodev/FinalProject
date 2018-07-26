@@ -1,5 +1,6 @@
 <?php
  session_start();
+ ini_set("display_errors",true);
  $username = "root";
  $password = "password";
  $hostname = "localhost"; 
@@ -154,19 +155,23 @@
       $result = mysqli_query($dbhandle,$query);
       return array("status"=>boolval($result));
     }
- function selectSubject($id){
+ function selectSubject($id,$email=false){
       $dbhandle = $GLOBALS["dbhandle"];
-      $query ="SELECT * FROM Subject where Id like '".strtolower($id)."'";
+      $query ="SELECT * FROM Subject where Id like '".$id."'";
+      if($email){$query.=" or degree LIKE '%".strtolower($id)."%'";}
+    
       $result = mysqli_query($dbhandle,$query);
+      $sub=array();
       while($row = mysqli_fetch_array($result)){
-          return $row;
+        $sub[] = $row;
       }
+      if(count($sub)>0)
+       return $sub;
     return array("error"=>"not found");}  
 
  function selectAllSubject(){
       $dbhandle = $GLOBALS["dbhandle"];
       $query ="SELECT * FROM Subject";
-      echo $query;
       $result = mysqli_query($dbhandle,$query);
       $arrayofarray = null;
       while($row = mysqli_fetch_array($result)){
@@ -189,23 +194,26 @@
       
         return array("status"=>$result,"subId"=>$id);}
  function updateSubject($change){
-          // get Id from sesssion or cookies 
-          $id ="1999126";
+          $id =$GLOBALS["qid"];
           $keys = array_keys($change);
-          $values = array_values(($change));
+          $values = array_values($change);
           $arr =selectSubject($id);
+          $arr = $arr[0];
           $in = array_key_exists("error",$arr);
            if($in){return array("status"=>"not exist");}
            $dbhandle = $GLOBALS["dbhandle"];
            $query ="UPDATE Subject SET ";
            for($i=0;$i<count($keys);$i++){
+             
              if($i<(count($keys)-1))
              $query .=$keys[$i] . "=\"".$values[$i]."\",";
              else
              $query .=$keys[$i] . "=\"".$values[$i]."\"";
            }
-          $query .=" WHERE Id=".$arr["Id"];
+          $query .=" WHERE Id=\"".$arr["Id"]."\"";
           $result = mysqli_query($dbhandle,$query);
+          print_r($query);
+    
           return array("status"=>$result);
   }
        
@@ -217,4 +225,5 @@
            return array("status"=>boolval($result));
          }
       
+
  ?>

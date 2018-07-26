@@ -2,61 +2,48 @@
  include_once("mysql.php");
  session_start();
  ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ ini_set('display_startup_errors', 1);
+  $GLOBALS["qs"] = array();
+  $GLOBALS["ans"] = array();
+  $GLOBALS["types"] = array();
+ function addquestion($q,$anq)
+ {
+  $GLOBALS["qs"][]=$q;
+  $l="a";
+  foreach ($anq as $key => $value) {
+    $GLOBALS["ans"][$q][$l++] = $value;
+  }
+  $type = "";
+  if(count($anq)==2)
+    $type = "tf";
+  else
+   $type="ml";
+   $GLOBALS["types"][] = $type;
+ }
  $creator =$_SESSION["id"];
  $subName=$_POST["subName"];
- if(isset($_POST["question3"]))
- {
     $q1 = $_POST["question1"];
     $anq1=$_POST["anq1"];
-
-    $q2 = $_POST["question2"];
-    $anq2 = $_POST["anq2"];
-   
-    $q3 = $_POST["question3"];
-    $anq3 = $_POST["anq3"];
-    
- }
- else if(isset($_POST["question2"]))
- {
-    $q1 = $_POST["question1"];
-    $anq1=$_POST["anq1"];
-    $q2 = $_POST["question2"];
-    $anq2 = $_POST["anq2"];
- }
- else if(isset($_POST["question1"]))
- {
-   
-    $q1 = $_POST["question1"];
-    $anq1=$_POST["anq1"];
+    $q2 = isset($_POST["question2"]) ?$_POST["question2"] : null;
+    $anq2 =  isset($_POST["anq2"])?$_POST["anq2"]: null;
     $emails = $_POST["email"];
-    $qs = array();
-    $qs[]=$q1;
-    $ans = array(array());
-    $l="a";
-    $types = array();
-    foreach ($anq1 as $key => $value) {
-        $ans[0][$l++] = $value;
-    }
-    
-    $type = "";
-    if(count($anq1)==2)
-      $type = "tf";
-    else
-     $type="ml";
-     $types[] = $type;
+    $q3 =  isset($_POST["question3"])?$_POST["question3"]: null;
+    $anq3 =  isset($_POST["anq3"])?$_POST["anq3"]: null;
+    addquestion($q1,$anq1);
+     if(!empty($q2))addquestion($q2,$anq2);
+     if(!empty($q3))addquestion($q3,$anq3);
     $degress = array();
     foreach($emails as $value)
     {
-      $degress[$value]= -1;
+      $degress[strtolower($value)]= -1;
     }
-  
-    $res = insertSubject($creator,$subName,1,json_encode($qs),json_encode($ans),json_encode($types),json_encode($degress));   
-    echo "<pre>";
-    print_r($res);
-    echo"</pre>";
- }
- 
+    print("<pre>");
+    print_r($qs);
+    print("</pre>");
+    $res = insertSubject($creator,$subName,count($qs),json_encode($qs),json_encode($ans),json_encode($types),json_encode($degress));   
+    $_SESSION["subId"] = $res["subId"];
+    header("Location:TeacherPanel.php");
+    exit();
 
 
 ?>

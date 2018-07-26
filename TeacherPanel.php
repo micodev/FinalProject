@@ -2,17 +2,20 @@
 
 <?php
    session_start();
+   
    if(!isset($_SESSION["id"])) // if user not login and enter the Home Again
-{header("Location:Home.php");
-  exit();
+{
+  
+  header("Location:Home.php");
+ 
 }
 else // if user login as teacher or student and enter the Home
 {
 if(!$_SESSION["isTeacher"])
 {
-   
-    header("Location:Home.php");
-    exit();
+
+   header("Location:StudentPanel.php");
+    
 }
 }
    ?>
@@ -20,7 +23,23 @@ if(!$_SESSION["isTeacher"])
 <html>
    <?php include("Head.php"); ?>
    <body>
-      <?php include("Header.php"); ?>
+       <?php 
+       if(isset($_SESSION["subId"]))
+       {
+         $subId = $_SESSION["subId"];
+         print('<div class ="row justify-content-center">
+         <span class="col-md-6 input-group mb-4 alert alert-primary" id="copy" role="alert">
+           click to copy question link that you have created
+             <span id="copytarget" hidden>something.com?get='.$subId.'</span>
+           </span>
+       </div>');
+       $_SESSION["subId"]= null;
+       }
+       ?>
+      
+      <?php 
+      include("Header.php"); 
+      ?>
       <main class="container" role="main">
          <div class="jumbotron text-center">
          <div class="col-md-12 text-center">

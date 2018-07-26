@@ -12,21 +12,31 @@
 ?>
 <!DOCTYPE html>
 <html>
- <?php include_once("Head.php"); ?>
+ <?php  include_once("Head.php"); ?>
 <body>
+<?php 
+  echo $_SESSION["isTeacher"]." <br>";
+  echo $_SESSION["id"]; ?>
 <?php
 include("Header.php"); 
 if(!isset($_SESSION["id"])) // if user not login and enter the Home Again
-include("notLogin.php");
+{ 
+   
+    include("notLogin.php");
+  
+}
 else // if user login as teacher or student and enter the Home
 {
-if($_SESSION["isTeacher"])
+if($_SESSION["isTeacher"] ==true)
 {
-    header("Location:TeacherPanel.php");
+    header("location: TeacherPanel.php",  true,  301 );  exit;
+    
 }
 else
 {
+  
     header("Location:StudentPanel.php");
+    
 }
 }
 ?>
