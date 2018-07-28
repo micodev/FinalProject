@@ -2,22 +2,13 @@
 
 <?php
    session_start();
-   
+   include("mysql.php");
    if(!isset($_SESSION["id"])) // if user not login and enter the Home Again
-{
-  
-  header("Location:Home.php");
- 
-}
-else // if user login as teacher or student and enter the Home
-{
-if(!$_SESSION["isTeacher"])
-{
-
+   header("Location:Home.php");
+   else // if user login as teacher or student and enter the Home
+   if(!$_SESSION["isTeacher"])
    header("Location:StudentPanel.php");
-    
-}
-}
+   $sid = $_SESSION["id"];
    ?>
 <!DOCTYPE html>
 <html>
@@ -30,7 +21,7 @@ if(!$_SESSION["isTeacher"])
          print('<div class ="row justify-content-center">
          <span class="col-md-6 input-group mb-4 alert alert-primary" id="copy" role="alert">
            click to copy question link that you have created
-             <span id="copytarget" hidden>something.com?get='.$subId.'</span>
+             <span id="copytarget" hidden>'.$_SERVER['HTTP_HOST'] .'/questions.php?qid='.$subId.'</span>
            </span>
        </div>');
        $_SESSION["subId"]= null;
@@ -47,12 +38,13 @@ if(!$_SESSION["isTeacher"])
             <ul class="nav nav-pills center-pills">
                <li>
                   <a class="nav-link" id="pills-Subject-tab" data-toggle="pill" href="#pills-Subject" role="tab" aria-controls="pills-Subject" aria-selected="false">New Subject</a> 
+                  <a class="nav-link" id="pills-Subject-tab" data-toggle="pill" href="#pills-Subjects" role="tab" aria-controls="pills-Subject" aria-selected="false">Your Subjects</a> 
                </li>
             </ul>
          </div>
          <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade" id="pills-Subject" role="tabpanel" aria-labelledby="pills-Subject-tab">
-               <form id="addSubject" action="/FinalProject/Subject.php" method="POST" >
+               <form id="addSubject" action="Subject.php" method="POST" >
                   <div class="form-group">
                      <label for="subName" >Subject Name</label>
                      <input name="subName" id="subName" class="form-control" type="text" required>
@@ -77,6 +69,13 @@ if(!$_SESSION["isTeacher"])
                   </div>
                   <button type="submit" class="btn btn-light">Submit</button>
                </form>
+            </div>
+            <div  class="tab-pane fade" id="pills-Subjects" role="tabpanel" aria-labelledby="pills-Subjects-tab">
+                <div class="container">
+                    <div class="row" >
+                     <?php include("subjectsCreator.php") ?>
+                    </div>
+                </div>
             </div>
          </div>
       </main>

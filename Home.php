@@ -23,15 +23,14 @@
         header("Location:StudentPanel.php", true,  301);
      
      }
+   
    }
    ?>
 <!DOCTYPE html>
 <html>
    <?php  include_once("Head.php"); ?>
    <body>
-      <?php 
-         echo $_SESSION["isTeacher"]." <br>";
-         echo $_SESSION["id"]; ?>
+     
       <?php
          include("Header.php"); 
          include("notLogin.php");

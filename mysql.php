@@ -123,7 +123,7 @@
     if($in){return array("status"=>"exist");}
     $dbhandle = $GLOBALS["dbhandle"];
     $id=crypt(uniqid($email),$email);
-    $query ="INSERT INTO Students VALUES ('$id', '$name', '$email', '$password', '{}')";
+    $query ="INSERT INTO Student VALUES ('$id', '$name', '$email', '$password', '{}')";
     $result = mysqli_query($dbhandle,$query);
     return array("status"=>$result);}
  function updateStudent($change){
@@ -155,16 +155,17 @@
       $result = mysqli_query($dbhandle,$query);
       return array("status"=>boolval($result));
     }
- function selectSubject($id,$email=false){
+ function selectSubject($id,$email=false,$cid=false){
       $dbhandle = $GLOBALS["dbhandle"];
       $query ="SELECT * FROM Subject where Id like '".$id."'";
       if($email){$query.=" or degree LIKE '%".strtolower($id)."%'";}
-    
+      if($cid){$query.=" or creatorId LIKE '".($id)."'";}
       $result = mysqli_query($dbhandle,$query);
       $sub=array();
       while($row = mysqli_fetch_array($result)){
         $sub[] = $row;
       }
+      
       if(count($sub)>0)
        return $sub;
     return array("error"=>"not found");}  

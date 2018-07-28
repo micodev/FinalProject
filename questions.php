@@ -1,57 +1,73 @@
-
-
 <?php
-   session_start();
-   ini_set("display_errors",true);
-   $qnum = isset($_POST["num"])?$_POST["num"]:NULL;
-   $qid = isset($_POST["qid"])?$_POST["qid"]:isset($_GET["qid"])?$_GET["qid"]:null;
-   include_once("mysql.php");
-   $student = selectStudent($_SESSION["id"]);
-   if($qid !=null)
-   {
-    if(!isset($_SESSION["qid"])||$qid!=$_SESSION["qid"])
-    {$_SESSION["qid"]=$qid; $_SESSION["qnum"]=null;}
-    if(!isset($_SESSION["qnum"]))
-    {$_SESSION["qnum"]=1;  $qnum=0;}
-    else
-    {$qnum=$_SESSION["qnum"];$_SESSION["qnum"]=$_SESSION["qnum"]+1;}
-    $sub = selectSubject($qid);
-    $qstr="submit";
-   
-    if($qnum>0){
-       $degree = json_decode($sub[0]["degree"],JSON_OBJECT_AS_ARRAY);
-       $question_1=$_POST["question"];
-       $answers = json_decode($sub[0]["answers"],JSON_OBJECT_AS_ARRAY)[$question_1];
-       $choice = $_POST["choice"];
-      
-       if($answers['a']==$choice){
-           $count = $sub[0]["questionCount"];
-               $degree[$student["email"]] += (100/$count); 
-               $v = array("degree"=>addslashes(json_encode($degree)));
-               updateSubject($v);
-         
-      }
-    }
-    if($sub[0]["questionCount"]==$qnum)
+session_start();
+$stId = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
+if (!isset($stId)) // if user not login and enter the Home Again
     {
-        $qstr = "Finish";
-        header("Location:StudentPanel.php",true,301);
+    if (isset($_GET["qid"]))
+        $_SESSION["geturl"] = $_GET["qid"];
+    $_SESSION["isTeacher"] = null;
+    header("Location:Home.php", true, 301);
+    exit();
+} else // if user login as teacher or student and enter the Home
+    {
+    if ($_SESSION["isTeacher"]) {
+        header("Location:TeacherPanel.php");
+        exit();
     }
-    else{
-    $question = json_decode($sub[0]["questionsId"],JSON_OBJECT_AS_ARRAY)[$qnum] ;
-    $answers = json_decode($sub[0]["answers"],JSON_OBJECT_AS_ARRAY)[$question];
-    shuffle($answers);
-    $type = json_decode($sub[0]["type"],JSON_OBJECT_AS_ARRAY)[$qnum];
-    $qnum=$qnum+1;
-   }
-   }
-   else
-   {
-     echo "wot ? ";
-     die();
-   }
-   
-   ?>
+}
+$qnum = isset($_POST["num"]) ? $_POST["num"] : NULL;
+$qid  = isset($_POST["qid"]) ? $_POST["qid"] : isset($_GET["qid"]) ? $_GET["qid"] : null;
+include_once("mysql.php");
+$student = selectStudent($_SESSION["id"]);
+if ($qid != null) {
+    if (!isset($_SESSION["qid"]) || $qid != $_SESSION["qid"]) {
+        $_SESSION["qid"]  = $qid;
+        $_SESSION["qnum"] = null;
+    }
+    if (!isset($_SESSION["qnum"])) {
+        $_SESSION["qnum"] = 1;
+        $qnum             = 0;
+    } else {
+        $qnum             = $_SESSION["qnum"];
+        $_SESSION["qnum"] = $_SESSION["qnum"] + 1;
+    }
+    $sub  = selectSubject($qid);
+    $qstr = "submit";
+    
+    if ($qnum > 0) {
+        $degree     = json_decode($sub[0]["degree"], JSON_OBJECT_AS_ARRAY);
+        $question_1 = $_POST["question"];
+        $answers = json_decode($sub[0]["answers"],JSON_OBJECT_AS_ARRAY)[$question_1];
+        $choice     = $_POST["choice"];
+        
+        if ($answers['a'] == $choice) {
+            $count = $sub[0]["questionCount"];
+            $degree[$student["email"]] += (100 / $count);
+            $v = array(
+                "degree" => addslashes(json_encode($degree))
+            );
+            updateSubject($v);
+            
+        }
+    }
+    if ($sub[0]["questionCount"] == $qnum) {
+        $qstr             = "Finish";
+        $_SESSION["qid"]  = $qid;
+        $_SESSION["qnum"] = null;
+        header("Location:StudentPanel.php", true, 301);
+    } else {
+        $question = json_decode($sub[0]["questionsId"],JSON_OBJECT_AS_ARRAY)[$qnum] ;
+        $answers = json_decode($sub[0]["answers"],JSON_OBJECT_AS_ARRAY)[$question];
+        shuffle($answers);
+        $type = json_decode($sub[0]["type"],JSON_OBJECT_AS_ARRAY)[$qnum];
+        $qnum = $qnum + 1;
+    }
+} else {
+    echo "wot ? ";
+    die();
+}
+
+?> 
 <!DOCTYPE html>
 <html>
    <?php include("Head.php"); ?>

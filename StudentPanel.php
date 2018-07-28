@@ -4,19 +4,27 @@
    session_start();
    include_once("mysql.php");
    ini_set('display_errors', 1); ini_set('display_startup_errors', 1);
-   $stId = isset($_SESSION["id"])?$_SESSION["id"]:"";
-   
-   if($stId=="") // if user not login and enter the Home Again
+   $stId = isset($_SESSION["id"])?$_SESSION["id"]:null;
+   if(!isset($stId)) // if user not login and enter the Home Again
 {
-    header("Location:Home.php");
+    $_SESSION["id"]= null;
+    $_SESSION["isTeacher"]=null;
+    header("Location:Home.php",true,301);
 }
 else // if user login as teacher or student and enter the Home
 {
-if($_SESSION["isTeacher"])
-{
-   
-    header("Location:Home.php");
-}
+    if(isset($_SESSION["geturl"]))
+    {    
+            $qid = $_SESSION["geturl"];
+            echo($qid);
+            $_SESSION["geturl"]=null;
+            header("Location:questions.php?qid=".$qid);
+            exit();
+    }
+    if($_SESSION["isTeacher"]){
+            header("Location:TeacherPanel.php");
+            exit();
+    }
 }
    ?>
 <!DOCTYPE html>

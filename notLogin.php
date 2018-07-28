@@ -30,7 +30,7 @@
        </form>
         </div> 
      <div class="tab-pane fade" id="pills-Regeister" role="tabpanel" aria-labelledby="pills-Regeister-tab">
-      <form action="/FinalProject/Regeister.php" method="POST" >
+      <form action="Regeister.php" method="POST" >
            <div class="form-group form-group-md">
                     <label for="exampleInputName">Your Name</label>
                     <input type="text" class="form-control" id="exampleInputName" aria-describedby="NameHelp" placeholder="Enter Name" name="name" value="">

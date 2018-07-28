@@ -1,7 +1,5 @@
 <?php
-//echo"<pre>";
-//print_r( $_SERVER["REQUEST_METHOD"]);
-//echo"</pre>";
+session_start();
 include_once("mysql.php");
 function regeister($teacher=false)
 {
@@ -18,21 +16,22 @@ function regeister($teacher=false)
    $te = selectTeacher($email,true);
    $_SESSION["id"]=$te["teacherId"];
    setcookie("id",$te["teacherId"],time()+(60*60*2),"/","localhost");
-   header("Location:Home.php");
+   header("Location:TeacherPanel.php");
   }
   else{
    insertStudent($name,$email,$password);
    $te = selectStudent($email,true);
+   print_r($te);
    $_SESSION["id"]=$te["studentId"];
    $_SESSION["isTeacher"] = false;
    setcookie("id",$te["studentId"],time()+(60*60*2),"/","localhost");
-   header("Location:Home.php");
+  header("Location:StudentPanel.php");
   }
 }
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
-  $isTeacher =strip_tags($_POST["isTeacher"]);
-  if($isTeacher=="on")
+  $istpost = isset($_POST["isTeacher"])?strip_tags($_POST["isTeacher"]):"";
+  if($istpost=="on")
    $isTeacher=true;
    else $isTeacher=false;
   regeister($isTeacher);

@@ -1,8 +1,6 @@
 <?php
-//echo"<pre>";
-//print_r( $_SERVER["REQUEST_METHOD"]);
-//echo"</pre>";
-include_once("mysql.php");
+session_start();
+include("mysql.php");
 function Login()
 {
   $email =strip_tags($_POST["email"]);
