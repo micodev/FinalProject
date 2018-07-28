@@ -37,7 +37,13 @@ else // if user login as teacher or student and enter the Home
       ?>
       <main class="container" role="main">
          <div class="jumbotron text-center">
-        
+         <div class="row" >
+             <div class="col col-sm-3">
+             <form action="/logout.php" method="POST">
+                <button name="sub" id="sub"  type="submit" class="btn btn-primary btn-md btn-block">Log out</button>
+               </form>
+             </div>
+         </div>
          <div class="row">
                <?php
                $student = selectStudent($stId);
