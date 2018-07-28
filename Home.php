@@ -6,6 +6,7 @@
    if(count($_COOKIE)>0)
    {
        // the cookie is enabled
+       
    }
    else
    { 

@@ -1,11 +1,11 @@
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8"> 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/all.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <style>
         * {
             padding: 0;
@@ -47,7 +47,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="/FinalProject/css/all.css">
+    <link rel="stylesheet" href="css/all.css">
     <script>
         function getQuestion(question) {
             $.ajax({
@@ -58,7 +58,10 @@
             });
         }
         $(document).ready(function() {
-
+            var cookieValue = $.cookie("first");
+            
+            if(cookieValue!="no")$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
+            $("[closer*='tip']").click(function(){$.cookie("first","no");$('.tool_tip').tooltip('hide');});
             $("#questionCount").val('0').change();
             $('#questionCount').on('change', function(e) {
                 $("#questionField").empty();

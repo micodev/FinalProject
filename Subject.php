@@ -40,7 +40,7 @@
     print("<pre>");
     print_r($qs);
     print("</pre>");
-    $res = insertSubject($creator,$subName,count($qs),json_encode($qs),json_encode($ans),json_encode($types),json_encode($degress));   
+    $res = insertSubject($creator,$subName,count($qs),json_encode($qs,JSON_UNESCAPED_UNICODE),json_encode($ans,JSON_UNESCAPED_UNICODE),json_encode($types,JSON_UNESCAPED_UNICODE),json_encode($degress,JSON_UNESCAPED_UNICODE));   
     $_SESSION["subId"] = $res["subId"];
     header("Location:TeacherPanel.php");
     exit();
