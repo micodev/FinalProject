@@ -31,6 +31,9 @@
           <button class="navbar-toggler" closer='tip' type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon tool_tip" data-toggle="tooltip" data-placement="bottom" data-html="true" title="if this first visit click here <a closer='tip' href='#' >x</a>"></span>
           </button>
+          <form action="/logout.php" method="POST" <?php if(!isset($_SESSION["id"])) echo("hidden"); ?>>
+                <button name="sub" id="sub"  type="submit" class="btn btn-primary btn-md btn-block">Sign-Out <i class="fas fa-sign-out-alt"></i></button>
+          </form>
         </div>
       </div>
 </header>

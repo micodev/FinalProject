@@ -1,9 +1,6 @@
-
-
 <?php
    session_start();
    include_once("mysql.php");
-   ini_set('display_errors', 1); ini_set('display_startup_errors', 1);
    $stId = isset($_SESSION["id"])?$_SESSION["id"]:null;
    if(!isset($stId)) // if user not login and enter the Home Again
 {
@@ -37,13 +34,7 @@ else // if user login as teacher or student and enter the Home
       ?>
       <main class="container" role="main">
          <div class="jumbotron text-center">
-         <div class="row" >
-             <div class="col col-sm-3">
-             <form action="/logout.php" method="POST">
-                <button name="sub" id="sub"  type="submit" class="btn btn-primary btn-md btn-block">Log out</button>
-               </form>
-             </div>
-         </div>
+       
          <div class="row">
                <?php
                $student = selectStudent($stId);
