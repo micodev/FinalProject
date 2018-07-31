@@ -51,7 +51,7 @@
     <script>
         function getQuestion(question) {
             $.ajax({
-                url: question + ".php",
+                url: "questionTemplate.php?max="+question,
                 success: function(result) {
                     $("#questionField").html(result);
                 }
@@ -66,7 +66,7 @@
             $('#questionCount').on('change', function(e) {
                 $("#questionField").empty();
                 if (this.value == 0) return;
-                getQuestion("question" + this.value);
+                getQuestion(this.value);
                 $(e.target).attr('disabled', true);
             });
             $(document).on('click', "button[class*='close']", function(e) {

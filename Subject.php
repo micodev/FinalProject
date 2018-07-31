@@ -22,16 +22,14 @@
  }
  $creator =$_SESSION["id"];
  $subName=$_POST["subName"];
-    $q1 = $_POST["question1"];
-    $anq1=$_POST["anq1"];
-    $q2 = isset($_POST["question2"]) ?$_POST["question2"] : null;
-    $anq2 =  isset($_POST["anq2"])?$_POST["anq2"]: null;
+    for($i =1;;$i++) // when np isset break
+    {
+      $q = isset($_POST["question$i"])?$_POST["question$i"] : null;
+      if($q==null){break;}
+      $anq =$_POST["anq$i"];
+      addquestion($q,$anq);
+    }
     $emails = $_POST["email"];
-    $q3 =  isset($_POST["question3"])?$_POST["question3"]: null;
-    $anq3 =  isset($_POST["anq3"])?$_POST["anq3"]: null;
-    addquestion($q1,$anq1);
-     if(!empty($q2))addquestion($q2,$anq2);
-     if(!empty($q3))addquestion($q3,$anq3);
     $degress = array();
     $inExam =array();
     foreach($emails as $value)
@@ -46,8 +44,8 @@
     json_encode($ans,JSON_UNESCAPED_UNICODE),json_encode($types,JSON_UNESCAPED_UNICODE),
     json_encode($degress,JSON_UNESCAPED_UNICODE),json_encode($inExam,JSON_UNESCAPED_UNICODE));
     $_SESSION["subId"] = $res["subId"];
-    header("Location:TeacherPanel.php");
-    exit();
+    //header("Location:TeacherPanel.php");
+  //  exit();
 
 
 ?>
