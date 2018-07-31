@@ -1,6 +1,5 @@
 <?php
  session_start();
- ini_set("display_errors",true);
  $username = "root";
  $password = "password";
  $hostname = "localhost"; 
@@ -183,14 +182,14 @@
       else
       return $arrayofarray;}
 
- function insertSubject($creator ,$name,$questionCount,$questions,$answers,$type,$degree){
+ function insertSubject($creator ,$name,$questionCount,$questions,$answers,$type,$degree,$inExam){
          // get id from session or cookies
     
         $cid =  $creator;
         $dbhandle = $GLOBALS["dbhandle"];
        
         $id="$cid".crypt(uniqid(time()),time());
-        $query ="INSERT INTO Subject VALUES ('$id', '$name', '$questionCount', '$questions', '$answers','$type','$cid','$degree')";
+        $query ="INSERT INTO Subject VALUES ('$id', '$name', '$questionCount', '$questions', '$answers','$type','$cid','$degree','$inExam')";
         $result = mysqli_query($dbhandle,$query);
       
         return array("status"=>$result,"subId"=>$id);}
@@ -213,6 +212,7 @@
            }
           $query .=" WHERE Id=\"".$arr["Id"]."\"";
           $result = mysqli_query($dbhandle,$query);
+        
           return array("status"=>$result);
   }
        

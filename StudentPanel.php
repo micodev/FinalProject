@@ -11,9 +11,9 @@
 else // if user login as teacher or student and enter the Home
 {
     if(isset($_SESSION["geturl"]))
-    {    
+    {
             $qid = $_SESSION["geturl"];
-            echo($qid);
+            if(!isset($_SESSION["currentSession"])) $_SESSION["currentSession"]= crypt(uniqid($qid),time()); 
             $_SESSION["geturl"]=null;
             header("Location:questions.php?qid=".$qid);
             exit();
@@ -22,7 +22,10 @@ else // if user login as teacher or student and enter the Home
             header("Location:TeacherPanel.php");
             exit();
     }
+    if(!isset($_SESSION["currentSession"])) $_SESSION["currentSession"] = crypt(uniqid( $stId ),time()); 
+    echo $_SESSION["currentSession"] ;
 }
+
    ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +42,7 @@ else // if user login as teacher or student and enter the Home
                <?php
                $student = selectStudent($stId);
                $sub = selectSubject($student["email"],true);
-             
+             if(!isset($sub["error"]))
               foreach($sub as $val){
                $degree= json_decode($val["degree"],$options=JSON_OBJECT_AS_ARRAY)[$student["email"]];
                $degree = $degree==-1?0:$degree ;

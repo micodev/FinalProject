@@ -18,12 +18,12 @@
        if(isset($_SESSION["subId"]))
        {
          $subId = $_SESSION["subId"];
-         print('<div class ="row justify-content-center">
-         <span class="col-md-6 input-group mb-4 alert alert-primary" id="copy" role="alert">
+         print('
+         <span style="display:block;margin:0;"class="input-group alert alert-primary text-center" id="copy" role="alert">
            click to copy question link that you have created
-             <span id="copytarget" hidden>'.$_SERVER['HTTP_HOST'] .'/questions.php?qid='.$subId.'</span>
-           </span>
-       </div>');
+         </span>
+         <span id="copytarget" hidden>'.$_SERVER['HTTP_HOST'] .'/questions.php?qid='.$subId.'</span>
+       ');
        $_SESSION["subId"]= null;
        }
        ?>

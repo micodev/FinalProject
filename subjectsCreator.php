@@ -1,5 +1,6 @@
 <?php
                       $sub = selectSubject($sid,false,true);
+                      if(!isset($sub["error"]))
                       foreach($sub as $val)
                       {
                         $name = $val["name"];

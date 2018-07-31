@@ -33,14 +33,18 @@
      if(!empty($q2))addquestion($q2,$anq2);
      if(!empty($q3))addquestion($q3,$anq3);
     $degress = array();
+    $inExam =array();
     foreach($emails as $value)
     {
       $degress[strtolower($value)]= -1;
+      $inExam[strtolower($value)]="";
     }
     print("<pre>");
     print_r($qs);
     print("</pre>");
-    $res = insertSubject($creator,$subName,count($qs),json_encode($qs,JSON_UNESCAPED_UNICODE),json_encode($ans,JSON_UNESCAPED_UNICODE),json_encode($types,JSON_UNESCAPED_UNICODE),json_encode($degress,JSON_UNESCAPED_UNICODE));   
+    $res = insertSubject($creator,$subName,count($qs),json_encode($qs,JSON_UNESCAPED_UNICODE),
+    json_encode($ans,JSON_UNESCAPED_UNICODE),json_encode($types,JSON_UNESCAPED_UNICODE),
+    json_encode($degress,JSON_UNESCAPED_UNICODE),json_encode($inExam,JSON_UNESCAPED_UNICODE));
     $_SESSION["subId"] = $res["subId"];
     header("Location:TeacherPanel.php");
     exit();
