@@ -146,7 +146,7 @@
     </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-    <meta name="description" content="LoginPage">
+    <meta name="description" content="Online Examination System">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>

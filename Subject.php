@@ -20,7 +20,8 @@
    $type="ml";
    $GLOBALS["types"][] = $type;
  }
- $creator =$_SESSION["id"];
+ $creator = isset($_SESSION["id"])?$_SESSION["id"]:null;
+ if($creator==null){header("Location:logout.php",true,301);exit();}
  $subName=$_POST["subName"];
     for($i =1;;$i++) // when np isset break
     {
@@ -44,8 +45,8 @@
     json_encode($ans,JSON_UNESCAPED_UNICODE),json_encode($types,JSON_UNESCAPED_UNICODE),
     json_encode($degress,JSON_UNESCAPED_UNICODE),json_encode($inExam,JSON_UNESCAPED_UNICODE));
     $_SESSION["subId"] = $res["subId"];
-    //header("Location:TeacherPanel.php");
-  //  exit();
+    header("Location:TeacherPanel.php");
+    exit();
 
 
 ?>

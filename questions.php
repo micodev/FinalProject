@@ -1,6 +1,5 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
 $stId = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
 if (!isset($stId)) // if user not login and enter the Home Again
     {
@@ -36,7 +35,6 @@ if ($qid != null) {
     }
     $subinExam = json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY);
     $inExam = $subinExam[$student["email"]];
-    var_dump($inExam);
     if($inExam!="" && $inExam!=$_SESSION["currentSession"]){
         // enter exam already
         header("Location:StudentPanel.php", true, 301);

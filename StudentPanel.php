@@ -23,7 +23,6 @@ else // if user login as teacher or student and enter the Home
             exit();
     }
     if(!isset($_SESSION["currentSession"])) $_SESSION["currentSession"] = crypt(uniqid( $stId ),time()); 
-    echo $_SESSION["currentSession"] ;
 }
 
    ?>

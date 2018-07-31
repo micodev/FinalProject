@@ -164,7 +164,6 @@
       while($row = mysqli_fetch_array($result)){
         $sub[] = $row;
       }
-      
       if(count($sub)>0)
        return $sub;
     return array("error"=>"not found");}  
