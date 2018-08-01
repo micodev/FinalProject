@@ -22,7 +22,6 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Degree</th>
-                                              
                                               </tr>
                                             </thead>';
                         $counter = 1;
@@ -35,7 +34,6 @@
                                                     <th scope="row">'.$counter++.'</th>
                                                     <td>'.$k.'</td>
                                                     <td>'.$v.'</td>
-                                                
                                                   </tr>
                                                 
                                                 </tbody>
@@ -56,8 +54,11 @@
                                           </div>
                                       </div>
                                       <div class="row text-center" style="margin-top:1%;">
-                                        <div class="col">
+                                        <div class="col m-1">
                                            <button type="button" data-toggle="modal" data-target="#addEamilModal" name="addEmail" class="addEmail btn btn-secondary btn-md btn-block" data-whatever="'.$Id.'">Add student email</button>
+                                        </div>
+                                        <div class="col m-1">
+                                        <button type="button" class="std-info btn btn-info btn-md btn-block" data-toggle="modal"  data-target="#studentStats" data-whatever="'.$Id.'">Students stats <i class="fas fa-chart-bar"></i></button>
                                         </div>
                                       </div>
                                   </div>

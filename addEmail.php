@@ -14,6 +14,7 @@ if($_SESSION["isTeacher"])
         $inExam = json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY);
         foreach($emails as $k=>$v)
         {
+            $v = strtolower($v);
             if(!array_key_exists($v,$degree)){
             $degree[$v]=-1;
             $inExam[$v]="";

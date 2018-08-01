@@ -88,6 +88,21 @@
                 answerclass.prop('disabled', true);
                 answerclass.parent().parent().parent().find('*').attr('disabled', false);
             });
+            $(document).on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                if(button.hasClass("std-info")){
+                var recipient = button.data('whatever');
+                var modal = $(this)
+                $.ajax({
+                type: "POST",
+                url: "Statistics.php?qid="+recipient,
+                success: function(result) {
+                    $("#statistic-container").html(result);
+                }
+            });
+                return;
+                }
+            });
             $("#addSubject").submit(function(eventObj) {
 
                 return true;

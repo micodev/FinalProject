@@ -101,15 +101,16 @@
       
     }
   return array("error"=>"not found");}
- function selectAllStudent(){
+ function selectAllStudent($id="",$qid=false){
     $dbhandle = $GLOBALS["dbhandle"];
     $query ="SELECT * FROM Student";
-    echo $query;
+    if($qid ==true)
+    {$query .=" where questioncurrent like '%".($id)."%' ";}
     $result = mysqli_query($dbhandle,$query);
     $arrayofarray = null;
     while($row = mysqli_fetch_array($result)){
       $row["isTeacher"] = false;
-     $arrayofarray[$row["StudentId"]] = $row;
+     $arrayofarray[$row["email"]] = $row;
     }
     if(count($arrayofarray)==0)
     return array("error"=>"no rows");
@@ -127,7 +128,7 @@
     return array("status"=>$result);}
  function updateStudent($change){
      // get Id from sesssion or cookies 
-     $id ="1999126";
+     $id =$_SESSION["id"];
      $keys = array_keys($change);
      $values = array_values(($change));
      $arr =selectStudent($id);
@@ -141,7 +142,7 @@
         else
         $query .=$keys[$i] . "=\"".$values[$i]."\"";
       }
-     $query .=" WHERE studentId=".$arr["studentId"];
+     $query .=" WHERE studentId='".$arr["studentId"]."'";
      $result = mysqli_query($dbhandle,$query);
      return array("status"=>$result);
      }

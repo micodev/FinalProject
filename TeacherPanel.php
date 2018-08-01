@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </div>
-                <!-- Modal -->
+                <!-- Modal add email -->
             <div class="modal fade" id="addEamilModal" tabindex="-1" role="dialog" aria-labelledby="addEamilModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -107,6 +107,25 @@
                       <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                   </form>
+                </div>
+              </div>
+            </div>
+            <!-- Modal for student stats -->
+            <div class="modal fade" id="studentStats" tabindex="-1" role="dialog" aria-labelledby="studentStatsLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="studentStatsLabel">Student stats</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="statistic-container">
+                    ...
+                  </div>
+                  <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>

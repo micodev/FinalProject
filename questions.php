@@ -24,7 +24,9 @@ if ($qid != null) {
     if(isset($sub["error"])||!strpos($sub[0]["inExam"],$student["email"])){  // if the subject deleted or not found
         $_SESSION["qid"]  = $qid;
         $_SESSION["qnum"] = null;
-        header("Location:StudentPanel.php",true,301); exit();
+       
+       header("Location:StudentPanel.php",true,301); 
+     exit();
     }
     if (!isset($_SESSION["qid"]) || $qid != $_SESSION["qid"]) {
         $_SESSION["qid"]  = $qid;
@@ -46,17 +48,17 @@ if ($qid != null) {
         exit();
     }
     if($inExam==""){
-    $_SESSION["qnum"] = 1;
-    $qnum = 0;
-    $inExams =json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY); 
-    $inExams[$student["email"]]= $_SESSION["currentSession"];
-    updateSubject(array("inExam"=>addslashes(json_encode($inExams))));
+        $_SESSION["qnum"] = 1;
+        $qnum = 0;
+        $inExams =json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY); 
+        $inExams[$student["email"]]= $_SESSION["currentSession"];
+        updateSubject(array("inExam"=>addslashes(json_encode($inExams))));
     }
     $qstr = "submit";
     if ($qnum > 0) {
         if ($_SERVER['REQUEST_METHOD'] != 'POST'){
-            header("Location:Home.php", true, 301);
-    exit();
+             header("Location:Home.php", true, 301);
+             exit();
         }
         $degree     = json_decode($sub[0]["degree"], JSON_OBJECT_AS_ARRAY);
         $question_1 = $_POST["question"];
@@ -73,6 +75,11 @@ if ($qid != null) {
             updateSubject($v);
             
         }
+        
+        $currentQuestion = json_decode($student["questioncurrent"],JSON_OBJECT_AS_ARRAY);
+        $currentQuestion[$sub[0]["Id"]][$question_1]=$choice;
+        $currentQuestion =addslashes(json_encode($currentQuestion,JSON_UNESCAPED_UNICODE));
+        updateStudent(array("questioncurrent"=>$currentQuestion));
     }
    if ($sub[0]["questionCount"] == $qnum) {
         $_SESSION["qid"]  = $qid;
