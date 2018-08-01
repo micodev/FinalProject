@@ -22,6 +22,7 @@ function regeister($teacher=false)
    insertStudent($name,$email,$password);
    $te = selectStudent($email,true);
    print_r($te);
+   $_SESSION["name"] = $te["name"];
    $_SESSION["id"]=$te["studentId"];
    $_SESSION["isTeacher"] = false;
    setcookie("id",$te["studentId"],time()+(60*60*2),"/","localhost");

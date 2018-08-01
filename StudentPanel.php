@@ -37,21 +37,25 @@ else // if user login as teacher or student and enter the Home
       <main class="container" role="main">
          <div class="jumbotron text-center">
        
-         <div class="row">
+         <div class="row row-eq-height">
                <?php
                $student = selectStudent($stId);
                $sub = selectSubject($student["email"],true);
              if(!isset($sub["error"]))
               foreach($sub as $val){
+               $Exam = json_decode($val["inExam"],JSON_OBJECT_AS_ARRAY);
+               $canExam =($Exam[$student["email"]]=="")?
+                        '<a href="questions.php?qid='.$val["Id"].'" class="btn btn-primary">Enter the exam</a>'
+                        :'<input href="#" type="button" class="btn btn-secondary" value="Compelete" disabled>';
                $degree= json_decode($val["degree"],$options=JSON_OBJECT_AS_ARRAY)[$student["email"]];
                $degree = $degree==-1?0:$degree ;
-               $card = ' <div class="col-sm-6">
+               $card = ' <div class="col col-sm-6">
                             <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">'.$val["name"].'</h5>
-                                <p class="card-text">Degree&nbsp:&nbsp'.$degree.'</p>
-                                <a href="questions.php?qid='.$val["Id"].'" class="btn btn-primary">Go somewhere</a>
-                            </div>
+                                <p class="card-text">Degree&nbsp:&nbsp'.$degree.'</p>'
+                               .$canExam.
+                            '</div>
                             </div>
                           </div>';
                 echo $card;

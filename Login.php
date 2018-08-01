@@ -8,12 +8,13 @@ function Login()
   $row =selectTeacherOrStudent($email,true); 
   var_dump($email . " : " .$password);
   var_dump($row);
-  if(isset($row["password"])&& $row["password"]==$password)
+  if(isset($row["password"])& $row["password"]==$password)
   { 
    
       $isT = $row["isTeacher"];
       var_dump($isT);
       $_SESSION["isTeacher"] = $isT;
+      $_SESSION["name"] = $row["name"];
       if($isT)
       {
         $_SESSION["id"] = $row["teacherId"];

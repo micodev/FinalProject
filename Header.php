@@ -1,3 +1,7 @@
+<?php
+session_start();
+$name = isset($_SESSION["name"])?$_SESSION["name"]:null;
+?>
 <header>
       <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -23,8 +27,8 @@
         </div>
       </div>
       <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
+        <div class="container d-flex justify-content-sm-between justify-content-center">
+          <a id="navicon" href="#" class="navbar-brand d-flex align-items-center">
           <i class="fas fa-book"></i>
             <strong>&nbspOES</strong>
           </a>
@@ -32,7 +36,18 @@
             <span class="navbar-toggler-icon tool_tip" data-toggle="tooltip" data-placement="bottom" data-html="true" title="if this first visit click here <a closer='tip' href='#' >x</a>"></span>
           </button>
           <form action="/logout.php" method="POST" <?php if(!isset($_SESSION["id"])) echo("hidden"); ?>>
-                <button name="sub" id="sub"  type="submit" class="btn btn-primary btn-md btn-block">Sign-Out <i class="fas fa-sign-out-alt"></i></button>
+          <div class="input-group input-group-sm m-1" >
+            <?php
+            if($name!=null){
+               $namediv = '<div class="input-group-prepend ">
+                <span class="input-group-text">Welcome '.$name.' !</span>
+                </div>';
+                echo $namediv;
+            }
+            ?>
+            <button name="sub" id="sub"  type="submit" style="cursor:pointer;" class="form-control">Sign-Out <i class="fas fa-sign-out-alt"></i></button>
+          </div>
+               
           </form>
         </div>
       </div>
