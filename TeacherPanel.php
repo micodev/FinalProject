@@ -22,7 +22,7 @@
          <span style="display:block;margin:0;"class="input-group alert alert-primary text-center" id="copy" role="alert">
            click to copy question link that you have created
          </span>
-         <span id="copytarget" hidden>'.$_SERVER['HTTP_HOST'] .'/questions.php?qid='.$subId.'</span>
+         <input id="copytarget" value="'.$_SERVER['HTTP_HOST'] .'/questions.php?qid='.$subId.'"  hidden>
        ');
        $_SESSION["subId"]= null;
        }
@@ -68,7 +68,7 @@
                   </div>
                   <div class="alert alert-primary row">
                     <label for="UserEmail">Email address</label>
-                    <input type="email" class="form-control" id="UserEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email[]">
+                    <input type="email" class="form-control" id="UserEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email[]" required>
                     <button style="margin-top:1%" name="addEmail" id="addStudent" class="btn btn-outline-primary" type="button"> Add student email <i class="fas fa-plus"></i></button>
                   </div>
                   <button type="submit" class="btn btn-light">Submit</button>
@@ -81,7 +81,37 @@
                     </div>
                 </div>
             </div>
+                <!-- Modal -->
+            <div class="modal fade" id="addEamilModal" tabindex="-1" role="dialog" aria-labelledby="addEamilModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addEamilModalLabel">addEmail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="/addEmail.php" method="POST">
+                    <div class="modal-body">
+                    
+                      <div class="alert alert-primary row">
+                        <label for="UserEmail">Email address</label>
+                        <input class="subIdModal btn btn-primary" value="" name="id" hidden>
+                        <input type="email" class="form-control" id="UserEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email[]" required>
+                        <button style="margin-top:1%" name="addEmail" id="addStudentModal" class="btn btn-outline-primary" type="button"> Add student email <i class="fas fa-plus"></i></button>
+                      </div>
+                  
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
          </div>
+         
       </main>
    </body>
 </html>

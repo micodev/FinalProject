@@ -1,0 +1,19 @@
+<?php
+    session_start();
+    if($_SESSION["isTeacher"])
+    {
+        if($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            include_once("mysql.php");
+            $id = $_POST["delete"];
+            deleteSubject($id);
+            header("location:TeacherPanel.php",true,301);
+            exit();
+        }
+    }
+    else
+    {
+        header("location:Home.php",true,301);
+        exit();
+    }
+?>

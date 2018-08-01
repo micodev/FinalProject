@@ -218,7 +218,7 @@
         
  function deleteSubject($id){
            $dbhandle = $GLOBALS["dbhandle"];
-           $query ="delete FROM Student where studentId like '".strtolower($id)."'";
+           $query ="delete FROM Subject where Id like '".$id."'";
            $result = mysqli_query($dbhandle,$query);
            return array("status"=>boolval($result));
          }

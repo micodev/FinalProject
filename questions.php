@@ -21,6 +21,11 @@ include_once("mysql.php");
 $student = selectStudent($_SESSION["id"]);
 if ($qid != null) {
     $sub  = selectSubject($qid);
+    if(isset($sub["error"])||!strpos($sub[0]["inExam"],$student["email"])){  // if the subject deleted or not found
+        $_SESSION["qid"]  = $qid;
+        $_SESSION["qnum"] = null;
+        header("Location:StudentPanel.php",true,301); exit();
+    }
     if (!isset($_SESSION["qid"]) || $qid != $_SESSION["qid"]) {
         $_SESSION["qid"]  = $qid;
         $_SESSION["qnum"] = null;

@@ -6,6 +6,7 @@
                       {
                         $name = $val["name"];
                         $degree = json_decode($val["degree"],JSON_OBJECT_AS_ARRAY);
+                        $Id =$val["Id"];
                         $col = 
                               '<div class="col col-sm-12 col-md-6" >
                                 <div class="card text-center" style="margin-top:1%;">
@@ -42,6 +43,22 @@
                           $col.=$row;
                         }
                                 $col.=' </table>
+                                      </div>
+                                      <div class="row text-center">
+                                          <div class="col" style="margin-bottom:1%">
+                                              <button type="button" name="copylink" id="copylink" class="copy btn btn-secondary btn-md btn-block" value="'.$_SERVER['HTTP_HOST'] .'/questions.php?qid='.$Id.'"
+                                              data-container="body" data-toggle="popover" data-placement="bottom" data-content="Copied">Copy Link</button>
+                                          </div>
+                                          <div class="col">
+                                            <form action="deleteSub.php" method="POST">
+                                                <button type="submit" name="delete" id="'.$Id.'" class="deleteSub btn btn-secondary btn-md btn-block" value="'.$Id.'">Delete Subject</button>
+                                            </form>
+                                          </div>
+                                      </div>
+                                      <div class="row text-center" style="margin-top:1%;">
+                                        <div class="col">
+                                           <button type="button" data-toggle="modal" data-target="#addEamilModal" name="addEmail" class="addEmail btn btn-secondary btn-md btn-block" data-whatever="'.$Id.'">Add student email</button>
+                                        </div>
                                       </div>
                                   </div>
                                 </div>

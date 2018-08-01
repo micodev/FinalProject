@@ -59,7 +59,6 @@
         }
         $(document).ready(function() {
             var cookieValue = $.cookie("first");
-            
             if(cookieValue!="no")$('.tool_tip').tooltip({trigger:'manual'}).tooltip('show');
             $("[closer*='tip']").click(function(){$.cookie("first","no");$('.tool_tip').tooltip('hide');});
             $("#questionCount").val('0').change();
@@ -83,16 +82,34 @@
 
                 return true;
             });
-            $("#addStudent").click(function() {
-                var o = '<input style="margin-top:1%;" type="email" class="form-control" id="UserEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email[]">'
+            $("[id*='addStudent']").click(function() {
+                var o = '<input style="margin-top:1%;" type="email" class="form-control" id="UserEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email[]" required>'
                 $(this).before(o);
             });
 
             $("#copy").on("click", function() {
-                copyToClipboard(document.getElementById("copytarget"));
+                ctc("#copytarget");
                 $(".alert").alert('close');
             });
-
+            $("[class*='copy']").on("click", function() {
+                $(this).popover('show');
+                 ctc(this);
+                 setTimeout(function () {
+                      $("[class*='copy']").popover('hide');
+                 }, 1000);
+            });
+            $('#addEamilModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var recipient = button.data('whatever'); // Extract info from data-* attributes
+                $("[class*='subIdModal']").val(recipient);
+            });
+            function ctc(element) {
+                    var $temp = $("<input>");
+                    $("body").append($temp);
+                    $temp.val($(element).val()).select();
+                    document.execCommand("copy");
+                    $temp.remove();
+            }
             function copyToClipboard(elem) {
                 // create hidden text element, if it doesn't already exist
                 var targetId = "_hiddenCopyText_";
