@@ -1,6 +1,6 @@
 <?php
 session_start();
-$stId = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
+$stId = isset($_SESSION["id"]) ? $_SESSION["id"] : null; // check if there's an ID
 if (!isset($stId)) // if user not login and enter the Home Again
     {
     if (isset($_GET["qid"]))
@@ -15,12 +15,17 @@ if (!isset($stId)) // if user not login and enter the Home Again
         exit();
     }
 }
-$qnum = isset($_POST["num"]) ? $_POST["num"] : NULL;
-$qid  = isset($_POST["qid"]) ? $_POST["qid"] : isset($_GET["qid"]) ? $_GET["qid"] : null;
+$qnum = isset($_POST["num"]) ? $_POST["num"] : NULL; //check question current question .
+$qid  = isset($_POST["qid"]) ? $_POST["qid"] : (isset($_GET["qid"])) ? $_GET["qid"] : null; //check quesion id question id
+if($_SERVER["REQUEST_METHOD"]=="GET"){ if($_SESSION["qnum"]!=null){ // if user push reload the exam will canceled
+    header("Location:StudentPanel.php",true,301); 
+    exit();
+}}
 include_once("mysql.php");
-$student = selectStudent($_SESSION["id"]);
-if ($qid != null) {
-    $sub  = selectSubject($qid);
+$student = selectStudent($stId); // select student 
+if ($qid != null) { // if the quesion id found
+    $sub  = selectSubject($qid); // select subject
+    $GLOBALS["pagetitle"] ="Exam : "+$sub[0]['name']; 
     if(isset($sub["error"])||!strpos($sub[0]["inExam"],$student["email"])){  // if the subject deleted or not found
         $_SESSION["qid"]  = $qid;
         $_SESSION["qnum"] = null;
@@ -28,14 +33,14 @@ if ($qid != null) {
        header("Location:StudentPanel.php",true,301); 
      exit();
     }
-    if (!isset($_SESSION["qid"]) || $qid != $_SESSION["qid"]) {
+    if (!isset($_SESSION["qid"]) || $qid != $_SESSION["qid"]) { //set the new subJECT ID
         $_SESSION["qid"]  = $qid;
         $_SESSION["qnum"] = null;
     }
-    if (!isset($_SESSION["qnum"])) {
+    if (!isset($_SESSION["qnum"])) { //if no question number then set one
         $_SESSION["qnum"] = 1;
         $qnum             = 0;
-    } else {
+    } else { // after push submit get next question
         if($_SESSION["qnum"]>=$sub[0]["questionCount"]+1)$_SESSION["qnum"]=0;
         $qnum = $_SESSION["qnum"];
         $_SESSION["qnum"] = $_SESSION["qnum"] + 1;
@@ -47,7 +52,7 @@ if ($qid != null) {
         header("Location:StudentPanel.php", true, 301);
         exit();
     }
-    if($inExam==""){
+    if($inExam==""){ // store the session of the exam
         $_SESSION["qnum"] = 1;
         $qnum = 0;
         $inExams =json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY); 
@@ -56,7 +61,7 @@ if ($qid != null) {
     }
     $qstr = "submit";
     if ($qnum > 0) {
-        if ($_SERVER['REQUEST_METHOD'] != 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] != 'POST'){ // if the method not post.
              header("Location:Home.php", true, 301);
              exit();
         }
@@ -65,7 +70,7 @@ if ($qid != null) {
         $answers = json_decode($sub[0]["answers"],JSON_OBJECT_AS_ARRAY)[$question_1];
         $choice     = $_POST["choice"];
         
-        if ($answers['a'] == $choice) {
+        if ($answers['a'] == $choice) { //chek the answer if true
             $count = $sub[0]["questionCount"];
             $degree[$student["email"]] += round((100 / $count));
             if($degree[$student["email"]]==99){$degree[$student["email"]]=100;}
@@ -75,20 +80,20 @@ if ($qid != null) {
             updateSubject($v);
             
         }
-        
+        // set the answer of eacher student
         $currentQuestion = json_decode($student["questioncurrent"],JSON_OBJECT_AS_ARRAY);
         $currentQuestion[$sub[0]["Id"]][$question_1]=$choice;
         $currentQuestion =addslashes(json_encode($currentQuestion,JSON_UNESCAPED_UNICODE));
         updateStudent(array("questioncurrent"=>$currentQuestion));
     }
-   if ($sub[0]["questionCount"] == $qnum) {
+   if ($sub[0]["questionCount"] == $qnum) { //if it was last question
         $_SESSION["qid"]  = $qid;
         $_SESSION["qnum"] = null;
         $_SESSION["currentSession"] =crypt(uniqid(($stId.microtime(TRUE))));
         header("Location:StudentPanel.php");
         exit();
     } else {
-        if($sub[0]["questionCount"] == $qnum+1)
+        if($sub[0]["questionCount"] == $qnum+1) // if it is the last question
         {
             $qstr  = "Finish";
         }
@@ -99,6 +104,7 @@ if ($qid != null) {
         $qnum = $qnum + 1;
     }
 } else {
+    // go away if any error happened
     echo "wot ? ";
     die();
 }

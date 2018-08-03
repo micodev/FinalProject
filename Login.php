@@ -1,21 +1,18 @@
 <?php
 session_start();
-include("mysql.php");
+include_once("mysql.php");  // include mysql for db usage.
 function Login()
 {
-  $email =strip_tags($_POST["email"]);
-  $password = strip_tags($_POST["password"]);
-  $row =selectTeacherOrStudent($email,true); 
-  var_dump($email . " : " .$password);
-  var_dump($row);
-  if(isset($row["password"])& $row["password"]==$password)
+  $email =strip_tags($_POST["email"]); // get email.
+  $password = strip_tags($_POST["password"]); // get password
+  $row =selectTeacherOrStudent($email,true);  // select user accord to email
+  if(isset($row["password"]) && $row["password"]==$password)
   { 
-   
+     // if information correct login and set session
       $isT = $row["isTeacher"];
-      var_dump($isT);
       $_SESSION["isTeacher"] = $isT;
       $_SESSION["name"] = $row["name"];
-      if($isT)
+      if($isT) //check if it is teacher 
       {
         $_SESSION["id"] = $row["teacherId"];
         header("Location:TeacherPanel.php");
@@ -29,10 +26,10 @@ function Login()
 }
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
-  Login();
+  Login(); // if request post login
 }
 else
 {
-  header("Location:Reallynigga?");
+  header("Location:Reallynigga?"); // redirect to not found page.
 }
 ?>

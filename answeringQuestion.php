@@ -1,3 +1,4 @@
+<?php // make question form for exam . ?>
 <form id="formquestions" action="<?php "questions.php?qid=$qid";?>" method="POST">
             <div class="row">
                <div class="col">

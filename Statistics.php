@@ -1,8 +1,9 @@
 <?php
+// get student statistics
 session_start();
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
- include("mysql.php");
+ include_once("mysql.php");
  $qid  = $_GET["qid"];
  $student = selectAllStudent($qid,true);
  $sub = selectSubject($qid); $sub =$sub[0];

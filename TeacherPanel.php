@@ -1,8 +1,9 @@
 
 
 <?php
+   $GLOBALS["pagetitle"] = "Teacher Panel";
    session_start();
-   include("mysql.php");
+   include_once("mysql.php");
    if(!isset($_SESSION["id"])) // if user not login and enter the Home Again
    header("Location:Home.php");
    else // if user login as teacher or student and enter the Home
@@ -76,8 +77,13 @@
             </div>
             <div  class="tab-pane fade" id="pills-Subjects" role="tabpanel" aria-labelledby="pills-Subjects-tab">
                 <div class="container">
-                    <div class="row" >
-                     <?php include("subjectsCreator.php") ?>
+                    <div class="row justify-content-center" style="margin-top:1%;">
+                      <div class="col col-md-2">
+                        <button type="button" name="refresh-subject" id="refresh-subjects" class="btn btn-primary btn-md">refresh <i class="fas fa-sync-alt"></i></button>
+                      </div>
+                    </div>
+                    <div id="subject-container" class="row" >
+                     <?php include_once("subjectsCreator.php") ?>
                     </div>
                 </div>
             </div>

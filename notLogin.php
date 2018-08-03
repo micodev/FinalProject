@@ -1,3 +1,4 @@
+<?php // not login form  ?>
 <main class="container" role="main">
   <div class="jumbotron text-center">
     <div class="col-md-12 text-center">

@@ -1,4 +1,5 @@
 <?php 
+// quesiton template
 $to = $_GET["max"];
 for($i=1;$i<=$to;$i++)
 {

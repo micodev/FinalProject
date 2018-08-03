@@ -3,8 +3,11 @@
  $username = "root";
  $password = "password";
  $hostname = "localhost"; 
+ // mysql connect
  $dbhandle = mysqli_connect($hostname, $username, $password)or die("Unable to connect to MySQL");
+ // select database
  $selected = mysqli_select_db($dbhandle,"Online_Examination");
+ // function used to select teacher or student or subject .
  function selectTeacherOrStudent($id,$email=false){
   $dbhandle = $GLOBALS["dbhandle"];
   $query ="SELECT * FROM Teacher where teacherId like '".strtolower($id)."'";

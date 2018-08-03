@@ -1,19 +1,26 @@
 <?php
     session_start();
-    if($_SESSION["isTeacher"])
-    {
-        if($_SERVER["REQUEST_METHOD"]=="POST")
+    if(isset($_SESSION['isTeacher']))
+        if($_SESSION["isTeacher"])
         {
-            include_once("mysql.php");
-            $id = $_POST["delete"];
-            deleteSubject($id);
-            header("location:TeacherPanel.php",true,301);
+            if($_SERVER["REQUEST_METHOD"]=="POST") // check if it is post method
+            {
+                include_once("mysql.php"); // include mysql for db usage
+                $id = $_POST["delete"]; // the id of subject to be deleted
+                deleteSubject($id); // delete sub
+                header("location:TeacherPanel.php",true,301); // redirect .
+                exit();
+            }
+        }
+        else
+        {
+            header("location:Home.php",true,301); // if not teacher redirect .
             exit();
         }
-    }
     else
     {
-        header("location:Home.php",true,301);
-        exit();
+      // if not logined redirect ....
+      header("location:Home.php",true,301); 
+      exit();
     }
 ?>

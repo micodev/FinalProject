@@ -1,5 +1,6 @@
 <?php
    session_start();
+   $GLOBALS["pagetitle"] ="Student panel";
    include_once("mysql.php");
    $stId = isset($_SESSION["id"])?$_SESSION["id"]:null;
    if(!isset($stId)) // if user not login and enter the Home Again

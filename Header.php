@@ -13,7 +13,7 @@ $name = isset($_SESSION["name"])?$_SESSION["name"]:null;
                 here you can make your own subject question then send 
                 the link to your student they must has already emails
                 that you know to can engage with the subject question
-                for more information please watch those tutrials <a class="badge badge-info" href="https://www.youtube.com/playlist?list=PLqfYvMw2TCypD6f6pygcvOlFikw_uhEb7">click here</a> .
+                for more information please watch those tutrials <a class="badge badge-info" href="https://www.youtube.com/playlist?list=PLqfYvMw2TCypD6f6pygcvOlFikw_uhEb7" target="_blank" >click here</a> .
               </p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
