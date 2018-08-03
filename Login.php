@@ -6,6 +6,13 @@ function Login()
   $email =strip_tags($_POST["email"]); // get email.
   $password = strip_tags($_POST["password"]); // get password
   $row =selectTeacherOrStudent($email,true);  // select user accord to email
+  if(isset($row["error"]))
+  {
+    $_SESSION["email_error_login"] = "The email not found";
+    $_SESSION["regeister"]=false;
+    header("location:Home.php",true,301); 
+    die();
+  }
   if(isset($row["password"]) && $row["password"]==$password)
   { 
      // if information correct login and set session
@@ -23,6 +30,13 @@ function Login()
       }
     
   }
+  else if(isset($row["password"]) && $row["password"]!=$password)
+  {
+    $_SESSION["password_error_login"] = "The password is not correct";
+    $_SESSION["regeister"]=false;
+    header("location:Home.php",true,301); 
+    die();
+  }
 }
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
@@ -30,6 +44,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 }
 else
 {
-  header("Location:Reallynigga?"); // redirect to not found page.
+  header("location:Home.php",true,301); 
+    die(); // redirect to home when the method is get .
 }
 ?>
