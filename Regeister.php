@@ -10,7 +10,7 @@ function regeister($teacher=false)
   if(strlen($name)==0){ echo "<script>alert('name must be more than zero character');</script>"; sleep(5);header("Location:Home.php");}
   if(strlen($email)==0){echo "email must be more than zero character"; sleep(5);header("Location:Home.php");}
   if(strlen($password)==0){echo ("password must be more than zero character");sleep(5);header("Location:Home.php");}
-  if($teacher){
+  if($teacher){ // regeister as teacher
    insertTeacher($name,$email,$password);
    $_SESSION["isTeacher"] = true;
    $te = selectTeacher($email,true);
@@ -18,7 +18,7 @@ function regeister($teacher=false)
    setcookie("id",$te["teacherId"],time()+(60*60*2),"/","localhost");
    header("Location:TeacherPanel.php");
   }
-  else{
+  else{// regeister as student
    insertStudent($name,$email,$password);
    $te = selectStudent($email,true);
    print_r($te);
@@ -39,6 +39,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 }
 else
 {
+  // if not post method send to notfound page.
   header("Location:Reallynigga?");
 }
 ?>

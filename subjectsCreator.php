@@ -1,7 +1,7 @@
 <?php
+                      // make subject card for teacher panel
                       session_start();
                       include_once("mysql.php");
-                      ini_set("display_error",true);
                       $sid = $_SESSION["id"];
                       $sub = selectSubject($sid,false,true);
                       if(!isset($sub["error"]))

@@ -23,10 +23,10 @@
  $creator = isset($_SESSION["id"])?$_SESSION["id"]:null;
  if($creator==null){header("Location:logout.php",true,301);exit();}
  $subName=$_POST["subName"];
-    for($i =1;;$i++) // when np isset break
+    for($i =1;;$i++) // when the question not set no more question.
     {
       $q = isset($_POST["question$i"])?$_POST["question$i"] : null;
-      if($q==null){break;}
+      if($q==null){sbreak;}
       $anq =$_POST["anq$i"];
       addquestion($q,$anq);
     }
