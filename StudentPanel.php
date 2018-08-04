@@ -41,6 +41,7 @@ else // if user login as teacher or student and enter the Home
          <div class="row row-eq-height">
                <?php
                $student = selectStudent($stId);
+               $student["email"] = strtolower($student["email"]);
                $sub = selectSubject($student["email"],true);
              if(!isset($sub["error"]))
               foreach($sub as $val){

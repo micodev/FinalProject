@@ -15,10 +15,10 @@ if($_SESSION["isTeacher"]) // check if user is teacher .
  
         foreach($emails as $k=>$v) 
         {
-            $v = strtolower($v);
-            if(!array_key_exists($v,$degree)){ // if the user not exist
-            $degree[$v]=-1;     // default degree
-            $inExam[$v]="";     // default value of user to make exam
+            $val = strtolower($v);
+            if(!array_key_exists($val,$degree)){ // if the user not exist
+            $degree[$val]=-1;     // default degree
+            $inExam[$val]="";     // default value of user to make exam
             }
         }
         $degree = addslashes(json_encode($degree,JSON_UNESCAPED_UNICODE)); // convert array to json object
