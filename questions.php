@@ -105,7 +105,7 @@ if ($qid != null) { // if the quesion id found
     }
 } else {
     // go away if any error happened
-    echo "wot ? ";
+    header("Location:Home.php", true, 301);
     die();
 }
 
