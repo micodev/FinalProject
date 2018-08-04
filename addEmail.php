@@ -1,5 +1,6 @@
 <?php
 session_start();
+ini_set("display_error",1);
 if($_SESSION["isTeacher"]) // check if user is teacher .
 {
     if($_SERVER["REQUEST_METHOD"]=="POST") //check if request method is post.
@@ -11,6 +12,7 @@ if($_SESSION["isTeacher"]) // check if user is teacher .
         $sub = selectSubject($subId); // select subject from sub id.
         $degree = json_decode($sub[0]["degree"],JSON_OBJECT_AS_ARRAY); // get degrees table to modify
         $inExam = json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY); // get users according the exam to modify.
+ 
         foreach($emails as $k=>$v) 
         {
             $v = strtolower($v);

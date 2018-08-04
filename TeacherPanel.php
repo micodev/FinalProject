@@ -102,7 +102,7 @@
                     
                       <div class="alert alert-primary row">
                         <label for="UserEmail">Email address</label>
-                        <input class="subIdModal btn btn-primary" value="" name="id" hidden>
+                        <input class="subIdaModal btn btn-primary" value="" name="id" type="hidden" hidden>
                         <input type="email" class="form-control" id="UserEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email[]" required>
                         <button style="margin-top:1%" name="addEmail" id="addStudentModal" class="btn btn-outline-primary" type="button"> Add student email <i class="fas fa-plus"></i></button>
                       </div>
