@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){ if($_SESSION["qnum"]!=null){ // if user p
 }}
 include_once("mysql.php");
 $student = selectStudent($stId); // select student 
+$student["email"] = strtolower($student["email"]);
 if ($qid != null) { // if the quesion id found
     $sub  = selectSubject($qid); // select subject
     $GLOBALS["pagetitle"] ="Exam : "+$sub[0]['name']; 

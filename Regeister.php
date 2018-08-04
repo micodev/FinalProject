@@ -5,7 +5,7 @@ function regeister($teacher=false)
 {
   $GLOBALS["s"] = "t";
   $name = strip_tags($_POST["name"]);
-  $email =strip_tags($_POST["email"]);
+  $email =strip_tags(strtolower($_POST["email"]));
   $password = strip_tags($_POST["password"]);
   $error=false;
   if(strlen($name)==0){ $_SESSION["name_error"] = "name must be more than zero character"; $error=true;}

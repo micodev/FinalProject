@@ -3,7 +3,7 @@ session_start();
 include_once("mysql.php");  // include mysql for db usage.
 function Login()
 {
-  $email =strip_tags($_POST["email"]); // get email.
+  $email =strip_tags(strtolower($_POST["email"])); // get email.
   $password = strip_tags($_POST["password"]); // get password
   $row =selectTeacherOrStudent($email,true);  // select user accord to email
   if(isset($row["error"]))

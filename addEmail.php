@@ -8,7 +8,7 @@ if($_SESSION["isTeacher"]) // check if user is teacher .
         include_once("mysql.php"); // include mysql for db usage.
         
         $subId = $_POST["id"]; // store subject id.
-        $emails = $_POST["email"]; // store users email .
+        $emails = strtolower($_POST["email"]); // store users email .
         $sub = selectSubject($subId); // select subject from sub id.
         $degree = json_decode($sub[0]["degree"],JSON_OBJECT_AS_ARRAY); // get degrees table to modify
         $inExam = json_decode($sub[0]["inExam"],JSON_OBJECT_AS_ARRAY); // get users according the exam to modify.

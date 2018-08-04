@@ -30,7 +30,7 @@
       $anq =$_POST["anq$i"];
       addquestion($q,$anq);
     }
-    $emails = $_POST["email"];
+    $emails = strtlower($_POST["email"]);
     $degress = array();
     $inExam =array();
     foreach($emails as $value)
