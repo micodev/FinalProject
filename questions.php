@@ -1,5 +1,6 @@
 <?php
 session_start();
+$GLOBALS["pagetitle"] ="Exam";
 $stId = isset($_SESSION["id"]) ? $_SESSION["id"] : null; // check if there's an ID
 if (!isset($stId)) // if user not login and enter the Home Again
     {
