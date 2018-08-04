@@ -27,6 +27,7 @@ function regeister($teacher=false)
    }
    $_SESSION["isTeacher"] = true;
    $te = selectTeacher($email,true);
+   $_SESSION["name"] = $name;
    $_SESSION["id"]=$te["teacherId"];
    setcookie("id",$te["teacherId"],time()+(60*60*2),"/","localhost");
    header("Location:TeacherPanel.php");
@@ -59,6 +60,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 else
 {
   // if not post method send to notfound page.
-  header("Location:Reallynigga?");
+  header("Location:Home.php",true,301);
+  die();
 }
 ?>
