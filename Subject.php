@@ -26,7 +26,7 @@
     for($i =1;;$i++) // when the question not set no more question.
     {
       $q = isset($_POST["question$i"])?$_POST["question$i"] : null;
-      if($q==null){sbreak;}
+      if($q==null){break;}
       $anq =$_POST["anq$i"];
       addquestion($q,$anq);
     }
