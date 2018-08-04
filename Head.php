@@ -9,7 +9,6 @@
     <script src="js/jquery.cookie.js"></script>
     <script src="js/web.js"></script>
    
-    <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/customcss.css">
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
