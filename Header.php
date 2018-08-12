@@ -6,7 +6,7 @@ $file =  basename($_SERVER['REQUEST_URI'], '?'.$_SERVER['QUERY_STRING']);
 ?>
    <header class="masthead">
         <div class="inner">
-          <h3 class="masthead-brand"><a id="navicon" href="#" class="navbar-brand d-flex align-items-center">
+          <h3 class="masthead-brand d-flex"><a id="navicon" href="#" class="navbar-brand d-flex align-items-center">
               <i  class="ico fas fa-book"></i>
                 <strong  class="ico">&nbspOES</strong>
               </a>

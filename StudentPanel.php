@@ -43,7 +43,7 @@ else // if user login as teacher or student and enter the Home
                $student = selectStudent($stId);
                $student["email"] = strtolower($student["email"]);
                $sub = selectSubject($student["email"],true);
-             if(!isset($sub["error"]))
+             if(!isset($sub["error"])){
               foreach($sub as $val){
                $Exam = json_decode($val["inExam"],JSON_OBJECT_AS_ARRAY);
                $canExam =($Exam[$student["email"]]=="")?
@@ -62,6 +62,10 @@ else // if user login as teacher or student and enter the Home
                           </div>';
                 echo $card;
               }
+            }
+            else{
+                echo "you don't have any new exam yet.";
+            }
                
                ?>
           </div>
