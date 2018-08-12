@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
    <?php  include_once("Head.php"); ?>
-   <body>
+   <body class="text-center w-100 d-flex flex-column">
      
       <?php
          include("Header.php"); 

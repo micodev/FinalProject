@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
  $questions=json_decode($sub["answers"],JSON_OBJECT_AS_ARRAY);
 }
 ?>
-<table class="table table-hover table-inverse table-responsive table-bordered">
+<table class="table table-condensed table-sm table-hover table-inverse table-responsive table-bordered">
     <thead class="thead-inverse|thead-default">
         <tr>
             <th>#</th>

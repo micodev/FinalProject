@@ -30,7 +30,7 @@ else // if user login as teacher or student and enter the Home
 <!DOCTYPE html>
 <html>
    <?php include("Head.php"); ?>
-   <body>
+   <body class="w-100 d-flex flex-column">
       
       <?php 
       include("Header.php"); 
@@ -47,12 +47,12 @@ else // if user login as teacher or student and enter the Home
               foreach($sub as $val){
                $Exam = json_decode($val["inExam"],JSON_OBJECT_AS_ARRAY);
                $canExam =($Exam[$student["email"]]=="")?
-                        '<a href="questions.php?qid='.$val["Id"].'" class="btn btn-primary">Enter the exam</a>'
-                        :'<input href="#" type="button" class="btn btn-secondary" value="Compelete" disabled>';
+                        '<a href="questions.php?qid='.$val["Id"].'" class="btn btn-dark">Enter the exam</a>'
+                        :'<input href="#" type="button" class="btn btn-dark" value="Compelete" disabled>';
                $degree= json_decode($val["degree"],$options=JSON_OBJECT_AS_ARRAY)[$student["email"]];
                $degree = $degree==-1?0:$degree ;
-               $card = ' <div class="col col-sm-6">
-                            <div class="card">
+               $card = ' <div class="col col-sm-6" style="margin-bottom:15px;">
+                            <div class="card  shadow">
                             <div class="card-body">
                                 <h5 class="card-title">'.$val["name"].'</h5>
                                 <p class="card-text">Degree&nbsp:&nbsp'.$degree.'</p>'

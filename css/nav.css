@@ -1,0 +1,157 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #000;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link
+{
+  color: #fff;
+  background: #333;
+}
+.jumbotron{
+  background: #fff;
+}
+.section{
+  
+  border-bottom :black 2px solid;
+  border-top :black 2px solid;
+}
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+html,
+body {
+  
+  background-color: white;
+}
+
+.table {
+  width: 50%;
+  margin: 0px auto;
+  float: none;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: #000;
+}
+
+.cover-container {
+  max-width: 42em;
+}
+.ico{
+  color:white;
+  margin-left: 10%;
+}
+/*
+ * Header
+ */
+.masthead {
+  width :100%;
+  background-color:black;
+  margin-bottom: 1px;
+}
+.stick{
+  
+    position:relative;
+    margin-top:5px;
+}
+@media only screen and (max-width :982px) {
+.table-condensed{
+  font-size: 10px;
+}
+}
+.card-header{
+  background: #000;
+  color: white;
+}
+.masthead-brand {
+  color: white;
+  margin-bottom: 0;
+}
+.center-pills{
+  padding-top:1px;
+  border-bottom: #000 2px solid;
+  margin-bottom: 5px;
+}
+.input-group-prepend>.input-group-text
+{
+  background:black;
+  color: white;
+}
+.nav-link{
+  margin-bottom: 2px;
+}
+.nav-masthead .nav-link {
+  margin-right: 1rem;
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+.shadow{
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-right: 1rem;
+}
+
+.nav-masthead .active {
+  margin-right: 1rem;
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+
+
+/*
+ * Footer
+ */
+.mastfoot {
+  color: rgba(255, 255, 255, .5);
+}

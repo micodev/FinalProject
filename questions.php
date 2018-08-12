@@ -115,7 +115,7 @@ if ($qid != null) { // if the quesion id found
 <!DOCTYPE html>
 <html>
    <?php include("Head.php"); ?>
-   <body>
+   <body class="w-100 d-flex flex-column">
       <?php
          include("Header.php");
          ?>
@@ -151,7 +151,7 @@ if ($qid != null) { // if the quesion id found
                </div>
                <div class="row">
                   <div class="col">
-                     <input type="submit" id="submait" class="btn btn-primary btn-lg btn-block" value="<?php echo $qstr; ?>">
+                     <input type="submit" id="submait" class="btn btn-dark btn-lg btn-block" value="<?php echo $qstr; ?>">
                   </div>
                </div>
             </form>

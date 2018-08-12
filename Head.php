@@ -8,7 +8,7 @@
     <script src="js/all.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/web.js"></script>
-   
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/customcss.css">
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

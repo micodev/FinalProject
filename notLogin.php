@@ -10,7 +10,7 @@
 }
 
 ?>
-<main class="container" role="main">
+<main role="main">
   <div class="jumbotron text-center">
     <div class="col-md-12 text-center">
         <p>Choose between</p>
@@ -43,7 +43,7 @@
            </div>
            
            <div class="form-group">
-            <button type="submit" class="btn btn-primary" name="Login">Submit</button>
+            <button type="submit" class="btn btn-dark" name="Login">Submit</button>
            </div>
        </form>
         </div> 
@@ -83,6 +83,7 @@
     </div>
   </div>
 </main>
+
 <?php 
     // rest errors
     $_SESSION["name_error"] = null; 
