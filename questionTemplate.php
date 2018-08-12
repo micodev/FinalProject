@@ -8,7 +8,7 @@ for($i=1;$i<=$to;$i++)
     <div class="col-lg">
     <div class="form-group">
         <label for="qustion'.$i.'">Enter Question '.$i.'</label>
-        <input type="text" name="question'.$i.'" id="question'.$i.'" class="form-control" placeholder="What is your name ?" aria-describedby="helpId">
+        <input type="text" name="question'.$i.'" id="question'.$i.'" class="form-control" placeholder="What is your name ?" aria-describedby="helpId" required>
     </div>
     </div>
     </div>
