@@ -1,12 +1,12 @@
 <?php // not login form 
   session_start();
   if($_SESSION["regeister"]){
-      $ractive ="show active";
+      $ractive ="active";
       $lactive="";
   }else
 {
       $ractive ="";
-      $lactive=" show active";
+      $lactive="active";
 }
 
 ?>
@@ -18,13 +18,13 @@
 					<div class="panel-heading btn-dark">
 						<div class="row justify-content-center">
 							<div class="col-xs-6 mr-2">
-								<a href="#" class="active" id="login-form-link">Login</a>
+								<a href="#" class="<?php echo $lactive?>" id="login-form-link">Login</a>
                             </div>
                             <div class="col-xs-6 mr-2">
 								<p class="text-primary d-inline">Or</p>
 							</div>
 							<div class="col-xs-6">
-								<a href="#" id="register-form-link">Register</a>
+								<a href="#"  class="<?php echo $ractive?>" id="register-form-link">Register</a>
 							</div>
 						</div>
 						<hr>
@@ -32,7 +32,7 @@
 					<div class="panel-body" style="padding-left:5%;padding-right:5%;">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form"  action="Login.php" method="POST" role="form" style="display: block;">
+								<form id="login-form" action="Login.php" method="POST" role="form" style="display: <?php if($lactive=="")echo 'none'; else echo 'block'; ?>;">
                                     <div class="form-group form-group-md">
                                         <input type="email" id="email-log" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email">
                                         <div class="alert alert-danger" role="alert" <?php if(!isset($_SESSION["email_error_login"]))echo "hidden"?>>
@@ -57,7 +57,7 @@
 									</div>
 								
 								</form>
-								<form id="register-form" action="Regeister.php" method="POST"  role="form" style="display: none;">
+								<form id="register-form" action="Regeister.php" method="POST"  role="form" style="display: <?php if($lactive!="")echo 'none'; else echo 'block'; ?>;">
                                     <div class="form-group form-group-md">
                                            
                                             <input type="text" class="form-control" id="exampleInputName" aria-describedby="NameHelp" placeholder="Enter Name" name="name" value="">
