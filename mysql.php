@@ -1,7 +1,7 @@
 <?php
  session_start();
  $username = "root";
- $password = "password";
+ $password = "";
  $hostname = "localhost"; 
  // mysql connect
  $dbhandle = mysqli_connect($hostname, $username, $password)or die("Unable to connect to MySQL");
