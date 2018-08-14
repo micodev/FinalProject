@@ -19,9 +19,9 @@
    }
    ?>
 <!DOCTYPE html>
-<html>
+<html class="h-100" >
    <?php  include_once("Head.php"); ?>
-   <body class="text-center w-100 d-flex flex-column">
+   <body class="h-100 d-flex flex-column">
      
       <?php
          include("Header.php"); 

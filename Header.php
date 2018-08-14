@@ -4,7 +4,7 @@ $name = isset($_SESSION["name"])?$_SESSION["name"]:null;
 $file =  basename($_SERVER['REQUEST_URI'], '?'.$_SERVER['QUERY_STRING']);
    $isQuestionPage =  strcmp($file,"questions.php");
 ?>
-   <header class="masthead">
+   <header id="header" class="masthead m-0">
         <div class="inner">
           <h3 class="masthead-brand d-flex"><a id="navicon" href="#" class="navbar-brand d-flex align-items-center">
               <i  class="ico fas fa-book"></i>
